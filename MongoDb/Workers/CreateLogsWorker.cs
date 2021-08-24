@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MongoDb.Events;
 using MongoDb.Interfaces;
 using System;
 using System.Threading;
@@ -25,8 +26,10 @@ namespace MongoDb.Workers
             {
                 while (!stoppingToken.IsCancellationRequested)
                 {
-                    var created =_logService.Create(new Events.LogEvent() { Descricao = "Descrição da pendência", Nome = "Minha Pendência" });
+                    var item = new LogEvent("Descrição da pendência","Minha Pendência");
+                    var created =_logService.Create(item);
                     _logger.LogInformation($"Pendência criada :: { created.Id }");
+
                     await Task.Delay(1000, stoppingToken);
                 }
             }

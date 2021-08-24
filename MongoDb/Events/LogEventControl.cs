@@ -4,9 +4,9 @@
     {
         public LogEventControl()
         {
-            Pendente = true;
+            Pending = true;
         }
 
-        public bool Pendente { get; set; }
+        public bool Pending { get; set; }
     }
 }

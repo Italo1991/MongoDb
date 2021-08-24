@@ -25,10 +25,11 @@ namespace MongoDb.Workers
             {
                 while (!stoppingToken.IsCancellationRequested)
                 {
-                    var itemEncontrado = _logService.FindPendente();
-                    itemEncontrado.LogEventControl.Pendente = false;
-                    _logService.Update(itemEncontrado.Id, itemEncontrado);
-                    _logger.LogInformation($"Pendência Solucionada :: { itemEncontrado.Id }");
+                    var item = _logService.FindPending();
+                    item.SetResolved();
+                    _logService.Update(item.Id, item);
+                    _logger.LogInformation($"Pendência Solucionada :: { item.Id }");
+
                     await Task.Delay(1500, stoppingToken);
                 }
             }

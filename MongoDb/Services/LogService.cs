@@ -12,10 +12,10 @@ namespace MongoDb.Services
             
         }
 
-        public LogEvent FindPendente()
+        public LogEvent FindPending()
         {
             return _mongoCollection
-                    .Find(entity => entity.LogEventControl.Pendente == true).FirstOrDefault();
+                    .Find(entity => entity.LogEventControl.Pending == true).FirstOrDefault();
         }
     }
 }
